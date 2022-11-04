@@ -1,0 +1,23 @@
+@page "/counter"
+
+@attribute [PiralExtension("ChildExtension")]
+<div>
+   @if (Parameter != null)
+    {
+        <label>Working!</label>
+        <label>Param1: @Parameter.Param1</label>
+
+        <label>Param2: @Parameter.Param2</label>
+    }
+    else
+    {
+        <label style="color:red">Not working!</label>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    [PiralParameter("params")]
+    public MyParam Parameter { get; set; }
+}

@@ -1,0 +1,20 @@
+
+@using System.Text.Json;
+
+@attribute [PiralExtension("ParentExtension")]
+<Extension Name="ChildExtension" Params=@BuildParameter()></Extension>
+
+@code {
+    MyParam parameter = new MyParam()
+        {
+            Param1 = "Hello World",
+            Param2 = 12345
+        };
+    private JsonElement BuildParameter()
+    {
+        var jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(parameter, new JsonSerializerOptions());
+        using var doc = JsonDocument.Parse(jsonUtf8Bytes);
+        return doc.RootElement.Clone();
+    }
+
+}
